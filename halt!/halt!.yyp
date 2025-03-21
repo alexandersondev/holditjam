@@ -424,6 +424,7 @@
     {"id":{"name":"SnowState","path":"scripts/SnowState/SnowState.yy",},},
     {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},
     {"id":{"name":"tile_set","path":"tilesets/tile_set/tile_set.yy",},},
+    {"id":{"name":"ts_collision","path":"tilesets/ts_collision/ts_collision.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

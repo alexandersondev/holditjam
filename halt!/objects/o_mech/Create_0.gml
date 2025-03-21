@@ -1,9 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//TILEMAP TO CHECK FOR COLLISION
+
 
 velocity_x = 0
 velocity_y = 0
+deacceleration = 1;
+velocity_limit = 10;
 
 //default equipment
 #region EQUIPMENT
@@ -14,7 +18,7 @@ chassis = {
 transport = {
 		durability: 100,
 		weight: 10,
-		force: 10
+		force: 25
 		};
 //maybe own object for state machine instead of just a struct?
 weapon = {
@@ -64,15 +68,52 @@ function apply_force(force, force_direction){
 	
 }
 
+function calculate_speed() {
+	
+	//normalize the vector if it's above the velocity limit
+	var _vector_length = sqrt(power(velocity_x,2)+power(abs(velocity_y),2))
+	if _vector_length > 4 {
+		if _vector_length > velocity_limit {
+			velocity_x = (velocity_x/_vector_length)*(velocity_limit)
+		}
+		if _vector_length > velocity_limit {
+			velocity_x = (velocity_y/_vector_length)*(velocity_limit)
+		}
+	}
+	
+	//apply equal deacceleration
+	if abs(velocity_x) > 0 and abs(velocity_y) > 0 {
+		var y_ratio = velocity_y/(abs(velocity_x)+abs(velocity_y))
+		velocity_y -= sign(velocity_y)*y_ratio*deacceleration*(power(0.1*_vector_length,2))
+		//we can calculate the x ratio by inverting it
+		velocity_x -= sign(velocity_x)*(1/y_ratio)*deacceleration*(power(0.1*_vector_length,2))
+	} else {
+		
+	}
+}
+
 function apply_velocity() {
 	var _xmovement = velocity_x 
 	var _ymovement = velocity_y
 	
-	while _xmovement > 0 {
+	while floor(abs(_xmovement))>0 {
 		
-		if place_meeeting(x
-		break;
+		if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), x+sign(_xmovement), y) {
+			x += sign(_xmovement)
+			_xmovement -= sign(_xmovement)
+		} else {
+			_xmovement=0	
+		}
 	}
+	while floor(abs(_ymovement))>0{
+		if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), x, +sign(_ymovement)) {
+			x += sign(_ymovement)
+			_ymovement -= sign(_ymovement)
+		} else {
+			_ymovement=0	
+		}
+	}
+
 	
 }
 
@@ -139,7 +180,9 @@ mvmstate.add("idle", {
 		
 	},
 	step: function() {
-		
+		//move 
+		apply_deacceleration();
+		apply_velocity();
 	}
 })
 #endregion 
