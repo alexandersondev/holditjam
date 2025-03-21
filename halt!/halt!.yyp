@@ -421,6 +421,7 @@
     {"id":{"name":"input_xy","path":"scripts/input_xy/input_xy.yy",},},
     {"id":{"name":"input_y","path":"scripts/input_y/input_y.yy",},},
     {"id":{"name":"SnowState","path":"scripts/SnowState/SnowState.yy",},},
+    {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},
     {"id":{"name":"tile_set","path":"tilesets/tile_set/tile_set.yy",},},
   ],
   "resourceType":"GMProject",

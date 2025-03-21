@@ -2,6 +2,7 @@
 // You can write your code in this editor
 
 //default equipment
+#region EQUIPMENT
 chassis = {
 		durability: 100,
 		weight: 10
@@ -29,4 +30,21 @@ weapon = {
 			return state
 		}
 }
+#endregion
 
+//manage player movement
+mvmstate = new SnowState("idle");
+//manage player combat
+cmbtstate = new SnowState("idle");
+//manage player control
+cntrlstate = new SnowState("combat");
+
+cntrlstate.add("combat", {
+	enter: function() {
+		
+	},
+	step: function() {
+		mvmstate.step()
+		cmbtstate.step()
+	}
+})
