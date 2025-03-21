@@ -1,0 +1,2 @@
+/// @description game setup
+randomise()
