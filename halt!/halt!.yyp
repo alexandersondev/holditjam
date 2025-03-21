@@ -84,6 +84,7 @@
   "name":"halt!",
   "resources":[
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
+    {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
     {"id":{"name":"__input_binding_get_label","path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},},
@@ -420,6 +421,7 @@
     {"id":{"name":"input_xy","path":"scripts/input_xy/input_xy.yy",},},
     {"id":{"name":"input_y","path":"scripts/input_y/input_y.yy",},},
     {"id":{"name":"SnowState","path":"scripts/SnowState/SnowState.yy",},},
+    {"id":{"name":"tile_set","path":"tilesets/tile_set/tile_set.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
