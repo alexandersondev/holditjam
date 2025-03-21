@@ -81,14 +81,20 @@ function calculate_speed() {
 		}
 	}
 	
-	//apply equal deacceleration
+	//apply equal deacceleration, check in case they're both 0
 	if abs(velocity_x) > 0 and abs(velocity_y) > 0 {
-		var y_ratio = velocity_y/(abs(velocity_x)+abs(velocity_y))
-		velocity_y -= sign(velocity_y)*y_ratio*deacceleration*(power(0.1*_vector_length,2))
+		var y_ratio = abs(velocity_y)/(abs(velocity_x)+abs(velocity_y))
+		velocity_y -= sign(velocity_y)*(y_ratio*deacceleration*(power(0.1*_vector_length,2)))
 		//we can calculate the x ratio by inverting it
-		velocity_x -= sign(velocity_x)*(1/y_ratio)*deacceleration*(power(0.1*_vector_length,2))
+		velocity_x -= sign(velocity_x)*((1/y_ratio)*deacceleration*(power(0.1*_vector_length,2)))
 	} else {
-		
+		if abs(velocity_y) > 0 {
+			velocity_y -= sign(velocity_y)*(deacceleration*(power(0.1*_vector_length,2)))	
+		} else {
+			if velocity_x > 0 {
+				velocity_x -= sign(velocity_x)*(deacceleration*(power(0.1*_vector_length,2)))
+			}
+		}
 	}
 }
 
@@ -183,7 +189,12 @@ mvmstate.add("idle", {
 		//move 
 		apply_deacceleration();
 		apply_velocity();
+		if 
 	}
+})
+mvmstate.add("transport_active", {
+	
+	
 })
 #endregion 
 
