@@ -4,12 +4,15 @@
 
 //see if mech is set
 //create a default mech
-if mech = noone {
-	mech = instance_create_layer(x, y, "Instances", o_mech)
+if global.playermech = noone {
+	global.playermech = instance_create_layer(x, y, "Instances", o_mech)
+
 } else {
-	with mech {
+	with global.playermech {
 		room_goto(other.room)	
 	}
 }
-mech.x = o_player.x
-mech.y = o_player.y
+
+global.playermech.x = o_player.x
+global.playermech.y = o_player.y
+global.playermech.player_owned = true
