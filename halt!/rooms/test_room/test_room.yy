@@ -12,9 +12,11 @@
   "layers":[
     {"$GMRTileLayer":"","%Name":"collision","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"collision","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":32,"SerialiseWidth":32,"TileCompressedData":[
           -160,-2147483648,-3,1,-29,-2147483648,-3,1,-29,-2147483648,-7,1,-19,-2147483648,-5,1,1,-2147483648,-7,
-          1,-17,-2147483648,-7,1,1,-2147483648,-7,1,-17,-2147483648,-7,1,-3,-2147483648,-4,1,-18,-2147483648,-6,
-          1,-25,-2147483648,-5,1,-13,-2147483648,-4,1,-10,-2147483648,1,1,-17,-2147483648,-15,1,-17,-2147483648,
-          -14,1,-21,-2147483648,-9,1,-523,-2147483648,
+          1,-17,-2147483648,-7,1,1,-2147483648,-7,1,-17,-2147483648,-7,1,-2,-2147483648,1,0,-4,1,-18,-2147483648,
+          -6,1,-25,-2147483648,-5,1,-13,-2147483648,-4,1,-10,-2147483648,4,1,-2147483648,-2147483648,1,-14,-2147483648,
+          -15,1,-2,-2147483648,1,1,-14,-2147483648,-14,1,-3,-2147483648,1,1,-17,-2147483648,-9,1,-5,-2147483648,
+          1,1,-31,-2147483648,1,1,-21,-2147483648,1,1,-9,-2147483648,1,1,-21,-2147483648,1,1,-9,-2147483648,-2,
+          1,-20,-2147483648,1,1,-9,-2147483648,-2,1,-18,-2147483648,-4,1,-8,-2147483648,1,1,-357,-2147483648,
         ],"TileDataFormat":1,},"tilesetId":{"name":"ts_collision","path":"tilesets/ts_collision/ts_collision.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v1","%Name":"inst_10C284BF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_10C284BF","objectId":{"name":"o_player","path":"objects/o_player/o_player.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":224.0,"y":96.0,},
