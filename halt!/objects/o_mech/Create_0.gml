@@ -9,6 +9,9 @@ velocity_y = 0
 deacceleration = 4.5;
 velocity_limit = 20;
 
+//CONTROL
+aiming_direction = 0
+
 
 #region MOVES
 shoot = false
@@ -84,24 +87,11 @@ transport = {
 		force: 15
 		};
 //maybe own object for state machine instead of just a struct?
-weapon = {
-		state: "doing nuttin",
-		ammo: 10,
-		weight: 10,
-		durability:100,
-		fire: function () { //replace later
-			show_debug_message("Hey, create the default weapon!")	
-			ammo -= 1;
-		},
-		reload: function() {
-			ammo += 10; //add reload functionality later	
-		},
-		ReturnAmmoCount: function () {
-			return ammo;
-		},
-		ReturnWeaponStatus: function () {
-			return state
-		}
+weapon = instance_create_layer(x, y, "instances", o_weapon)
+weapon.owner = self
+weapon.player_owned = true
+if player_owned {
+	weapon.player_owned = true	
 }
 #endregion
 
@@ -210,12 +200,12 @@ function calculate_speed() {
 function apply_velocity() {
 	var _xmovement = velocity_x 
 	var _ymovement = velocity_y
-	show_debug_message("xVelocity: " + string(_xmovement))
-	show_debug_message("yVelocity: " +string(_ymovement))
+	//show_debug_message("xVelocity: " + string(_xmovement))
+	//show_debug_message("yVelocity: " +string(_ymovement))
 	
 	while floor(abs(_xmovement))>0 {
 		if sign(_xmovement) == 1 {
-			if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), bbox_right+1, y) == 0 {
+			if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), bbox_right+1, y-5) == 0 {
 				x+=1
 				_xmovement -= sign(_xmovement)
 				//show_debug_message("No tile detected, moving x position")
@@ -223,7 +213,7 @@ function apply_velocity() {
 				break	
 				}
 			} else if sign(_xmovement)==-1 {
-				if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), bbox_left-1, y) == 0 {
+				if tilemap_get_at_pixel(layer_tilemap_get_id(layer_get_id("collision")), bbox_left-1, y-5) == 0 {
 					x-=1
 					_xmovement -= sign(_xmovement)
 					//show_debug_message("No tile detected, moving x position")
@@ -357,9 +347,21 @@ mvmstate.add("transport_active", {
 
 cmbtstate.add("idle", {
 	step: function () {
-		
+		if shoot {
+			cmbtstate.change("fire")	
+		}
 	}
 })
+
+cmbtstate.add("fire", {
+	step: function () {
+		weapon.fire()
+		if !shoot {
+			cmbtstate.change("idle")	
+		}
+	}
+})
+
 
 
 cntrlstate.add("combat", {
