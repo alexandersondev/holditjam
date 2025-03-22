@@ -24,6 +24,10 @@ function __input_config_verbs()
             cancel:  input_binding_key(vk_backspace),
             action:  input_binding_key(vk_enter),
             special: input_binding_key(vk_shift),
+			
+			reload: input_binding_key("R"),
+			
+			swap: input_binding_key("E"),
             
             //No aiming verbs since we use the mouse for that (see below for aiming verb examples)
             shoot: input_binding_mouse_button(mb_left),
