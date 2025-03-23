@@ -347,7 +347,9 @@ mvmstate.add("transport_active", {
 
 cmbtstate.add("idle", {
 	step: function () {
-		if shoot {
+		if swap {
+			cmbtstate.change("swap")	
+		} else if shoot {
 			cmbtstate.change("fire")	
 		}
 	}
@@ -357,11 +359,35 @@ cmbtstate.add("fire", {
 	step: function () {
 		weapon.fire()
 		if !shoot {
-			cmbtstate.change("idle")	
+			if swap {
+				cmbtstate.change("swap")	
+			}else {
+				cmbtstate.change("idle")	
+			}
 		}
 	}
 })
 
+cmbtstate.add("swap", {
+	enter: function() {
+		if place_meeting(x, y, o_equipment) {
+			var _equip = instance_place(x, y, o_equipment)
+			var _equipment = _equip.pickup()
+			switch(_equipment.item_type) {
+				case "w":
+					weapon = _equipment.equipment_data
+					break;
+				case "c":
+					chassis = _equipment.equipment_data
+					break;
+				case "t":
+					transport = _equipment.equipment_data
+					break;
+			}
+		}
+		cmbtstate.change("idle")
+	}
+})
 
 
 cntrlstate.add("combat", {

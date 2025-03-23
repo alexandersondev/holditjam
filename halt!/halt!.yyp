@@ -80,6 +80,7 @@
   "resources":[
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
     {"id":{"name":"o_camera","path":"objects/o_camera/o_camera.yy",},},
+    {"id":{"name":"o_equipment","path":"objects/o_equipment/o_equipment.yy",},},
     {"id":{"name":"o_game","path":"objects/o_game/o_game.yy",},},
     {"id":{"name":"o_mech","path":"objects/o_mech/o_mech.yy",},},
     {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},},
@@ -425,6 +426,7 @@
     {"id":{"name":"SnowState","path":"scripts/SnowState/SnowState.yy",},},
     {"id":{"name":"default_bullet","path":"sprites/default_bullet/default_bullet.yy",},},
     {"id":{"name":"s_default_weapon","path":"sprites/s_default_weapon/s_default_weapon.yy",},},
+    {"id":{"name":"s_pickup","path":"sprites/s_pickup/s_pickup.yy",},},
     {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},
     {"id":{"name":"Sprite2","path":"sprites/Sprite2/Sprite2.yy",},},
     {"id":{"name":"Sprite3","path":"sprites/Sprite3/Sprite3.yy",},},
