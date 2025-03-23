@@ -6,6 +6,7 @@ length = 7
 fire_slowdown= 10
 ammo_max = 10
 ammo = 0;
+damage = 10;
 //alarm[0] as reload time
 
 
@@ -15,6 +16,7 @@ function fire() {
 		var _bullet = instance_create_layer(x+lengthdir_x(sprite_height,
 		image_angle), y+lengthdir_y(sprite_height, image_angle), "Instances", o_projectile)
 		_bullet.image_angle = image_angle
+		_bullet.hit_damage = damage
 		_bullet.bullet_direction = point_direction(x, y, x+lengthdir_x(sprite_height,
 		image_angle), y+lengthdir_y(sprite_height, image_angle))
 		alarm[0] = fire_slowdown
