@@ -99,13 +99,13 @@ if player_owned {
 function get_weight(){
 	//check if anything is destroyed, than just add 10 as a default value
 	var weight_sum = 1;
-	if chassis.durability > 0 {
+	if chassis.durability < 1 {
 		weight_sum += 5	
 	}
-	if transport.durability > 0 {
+	if transport.durability < 1 {
 		weight_sum += 5
 	}
-	if weapon.durability > 0 {
+	if weapon.durability < 1 {
 		weight_sum += 5
 	}
 	return weight_sum
@@ -121,6 +121,7 @@ function apply_force(force, force_direction){
 	
 	velocity_x = f_x*force/get_weight()
 	velocity_y = f_y*force/get_weight()
+	show_debug_message("weight: "+ string(get_weight()))
 	
 }
 
