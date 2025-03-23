@@ -11,6 +11,7 @@ weapon.owner = self
 if player_owned {
 	weapon.player_owned = true
 }
+
 //show_debug_message("xVelocity: " + string(velocity_x))
 //show_debug_message("yVelocity: " +string(velocity_y))
 //show_debug_message("move left: " +string(move_left))

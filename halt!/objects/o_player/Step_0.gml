@@ -1,6 +1,16 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+//CHECK For door
+with global.playermech { 
+	if place_meeting(x, y, o_door) {
+		if input_check("interact") {
+			other.change_room(instance_place(x,y, o_door).goto_next())
+		}
+	}
+}
+
+
 global.playermech.aiming_direction = point_direction(global.playermech.x,
 global.playermech.y, mouse_x, mouse_y)
 

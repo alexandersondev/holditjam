@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+//CHECK FOR DOOR
 
 //TILEMAP TO CHECK FOR COLLISION
 
@@ -259,7 +260,8 @@ function apply_velocity() {
 
 
 function die(){
-	
+	cntrlstate.change("dead")
+	sprite_index = s_deadassthing
 }
 
 function take_damage(damage) {
@@ -287,8 +289,12 @@ function take_damage(damage) {
 		}
 		
 	}
-	
-	choice = choice_list[irandom(ds_list_size(choice_list)-1)]
+
+	choice = choice_list[|irandom(ds_list_size(choice_list)-1)]
+	var temp_text = instance_create_layer(x-30, y+40, "Instances", o_temptext)
+	with temp_text {
+		temp_text.defaulttext = "choice:"+ string(other.choice)	
+	}
 	if choice == "w" {
 		weapon.durability -= damage;
 	}
@@ -296,7 +302,8 @@ function take_damage(damage) {
 		transport.durability -= damage;
 	}
 	if choice == "c" {
-		if damage > chassis_durability  {
+		chassis.durability -= damage
+		if damage > chassis.durability  {
 			die()
 		}
 	}
@@ -411,3 +418,10 @@ cntrlstate.add("combat", {
 		cmbtstate.step()
 	}
 })
+
+cntrlstate.add("dead", {
+	step: function() {
+		
+	}
+})
+	

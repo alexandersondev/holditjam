@@ -28,6 +28,8 @@ function __input_config_verbs()
 			reload: input_binding_key("R"),
 			
 			swap: input_binding_key("E"),
+			
+			interact: input_binding_key("Q"),
             
             //No aiming verbs since we use the mouse for that (see below for aiming verb examples)
             shoot: input_binding_mouse_button(mb_left),
