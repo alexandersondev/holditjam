@@ -79,6 +79,7 @@
   "name":"halt!",
   "resources":[
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
+    {"id":{"name":"o_camera","path":"objects/o_camera/o_camera.yy",},},
     {"id":{"name":"o_game","path":"objects/o_game/o_game.yy",},},
     {"id":{"name":"o_mech","path":"objects/o_mech/o_mech.yy",},},
     {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},},

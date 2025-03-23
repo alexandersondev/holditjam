@@ -16,3 +16,7 @@ if global.playermech = noone {
 global.playermech.x = o_player.x
 global.playermech.y = o_player.y
 global.playermech.player_owned = true
+
+global.playercam = instance_create_layer(x, y, "Instances", o_camera)
+global.playercam.follow_object = global.playermech
+global.playercam.configCamera(global.playermech)
