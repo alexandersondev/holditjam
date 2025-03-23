@@ -42,3 +42,20 @@ global.playermech.x = x
 global.playermech.y = y
 global.playermech.player_owned = true
 
+
+//create grid for enemies to follow
+
+var cellsize = 16;
+var roomWidth = room_width div cellsize;
+var roomHeight = room_height div cellsize;
+global.collisionGrid = mp_grid_create(0,0, roomWidth, roomHeight, cellsize, cellsize);
+
+var collisionLayerID = layer_tilemap_get_id("collision");
+
+for (var i=0; i < roomWidth; i++){
+	for(var j = 0; j < roomHeight; j++){
+	if (tilemap_get(collisionLayerID, i, j)){// I think this is the error
+		mp_grid_add_cell(global.collisionGrid, i, j);
+		}
+	}
+}

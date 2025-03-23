@@ -337,6 +337,11 @@ mvmstate.add("idle", {
 		}	
 	}
 })
+
+mvmstate.add("transport_controlled", {
+	step: function() { apply_velocity() }
+})
+
 mvmstate.add("transport_active", {
 	enter: function() {
 		
