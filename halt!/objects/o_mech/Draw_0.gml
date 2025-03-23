@@ -3,4 +3,5 @@
 draw_self()
 
 //draw movement state
-draw_text(x, y-80, "xvelocity: " + string(velocity_x) + "yvelocity:" + string(velocity_y))
+draw_text(x, y-80, "durability: " + string(chassis.durability))
+

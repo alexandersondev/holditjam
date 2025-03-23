@@ -3,6 +3,7 @@
 behaviorState = new SnowState("idle");
 controlledMech = instance_create_layer(x, y, "Instances", o_mech);
 engage_distance = 600;
+stay_distance = 64;
 
 with controlledMech {
 	//randomize states
@@ -11,15 +12,15 @@ with controlledMech {
 
 	weapon.durability = irandom_range(15,50)
 	weapon.weight = irandom_range(15,50)
-	weapon.fire_slowdown = irandom_range(1,10)
+	weapon.fire_slowdown = irandom_range(4,10)
 	weapon.damage = irandom_range(3,23)
 	
 	transport.weight = irandom_range(5, 20)
 	transport.durability = irandom_range(20, 50)
 	
-	transport.force = irandom_range(
-	transport.weight+weapon.weight+chassis.weight, transport.weight+weapon.weight+chassis.weight+3)
+	transport.force = irandom_range(5,30)
 	
+	sprite_index = choose(Sprite12, Sprite13)
 }
 
 chasePath = path_add();
@@ -42,10 +43,10 @@ behaviorState.add("idle", {step: function() {
 			if player_dist <= engage_distance {
 				behaviorState.change("engage")	
 			}
-			controlledMech.left = false
-			controlledMech.right = false 
-			controlledMech.up = false 
-			controlledMech.down = false
+			controlledMech.move_left = false
+			controlledMech.move_right = false 
+			controlledMech.move_up = false 
+			controlledMech.move_down = false
 			
 	}
 })
@@ -54,32 +55,42 @@ behaviorState.add("engage", {step: function() {
 		controlledMech.mvmstate.change("transport_active")
 		//walk_path()
 		//idk 
+		with controlledMech {
+			aiming_direction = 	point_direction(x, y, global.playermech.x, global.playermech.y)
+			weapon.fire()
+		}
 
-		
+		if distance_to_object(global.playermech) > stay_distance {
 		//find furthest direction
 		var _updist = abs(controlledMech.y-global.playermech.y)
 		var _downdist = abs(controlledMech.x-global.playermech.x)
 		
 		if _updist > _downdist {
-			controlledMech.right = false 
-			controlledMech.left = false
+			controlledMech.move_right = false 
+			controlledMech.move_left = false
 			if controlledMech.y > global.playermech.y {
-				controlledMech.up = true
-				controlledMech.down = false
+				controlledMech.move_up = true
+				controlledMech.move_down = false
 			} else {
-				controlledMech.down = true
-				controlledMech.up = false
+				controlledMech.move_down = true
+				controlledMech.move_up = false
 			}	
 		} else {
-			controlledMech.up = false 
-			controlledMech.down = false
-			if controlledMech.x > global.playermech.x {
-				controlledMech.right = true	
-				controlledMech.left = false
+			controlledMech.move_up = false 
+			controlledMech.move_down = false
+			if controlledMech.x < global.playermech.x {
+				controlledMech.move_right = true	
+				controlledMech.move_left = false
 			} else {
-				controlledMech.left = true
-				controlledMech.right = false
+				controlledMech.move_left = true
+				controlledMech.move_right = false
 			}
+		}
+		} else {
+			controlledMech.move_left = false
+			controlledMech.move_right = false
+			controlledMech.move_up = false
+			controlledMech.move_down = false
 		}
 		
 		//APPROACH PLAYER FOR OPTIMAL DISTANCE AND FIRE
@@ -88,6 +99,8 @@ behaviorState.add("engage", {step: function() {
 		if player_dist > engage_distance {
 				behaviorState.change("idle")
 		}
+		
+		
 	}
 })
 

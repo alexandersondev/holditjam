@@ -2,7 +2,7 @@
 // You can write your code in this editor
 weight = 10
 durability = 10
-length = 7
+weapon_length = 20
 fire_slowdown= 10
 ammo_max = 10
 ammo = 0;

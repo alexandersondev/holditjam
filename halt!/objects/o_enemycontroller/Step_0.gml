@@ -4,3 +4,5 @@ if controlledMech.cntrlstate.get_current_state()=="dead"{
 }
 behaviorState.step()
 //move enemy along with controller
+x = controlledMech.x
+y = controlledMech.y

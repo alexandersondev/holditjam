@@ -14,6 +14,9 @@ with global.playermech {
 global.playermech.aiming_direction = point_direction(global.playermech.x,
 global.playermech.y, mouse_x, mouse_y)
 
+if global.playermech.cntrlstate.get_current_state() == "dead" {
+		room_restart()
+}
 //update mech's moves
 if global.playermech != noone {
 	//follow mech
