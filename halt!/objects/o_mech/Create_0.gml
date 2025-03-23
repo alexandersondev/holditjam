@@ -84,7 +84,7 @@ chassis = {
 transport = {
 		durability: 100,
 		weight: 10,
-		force: 15
+		force: 10
 		};
 //maybe own object for state machine instead of just a struct?
 weapon = instance_create_layer(x, y, "instances", o_weapon)
@@ -119,82 +119,85 @@ function apply_force(force, force_direction){
 	show_debug_message("f_y:" + string(f_y))
 	show_debug_message("f_dir:" + string(force_direction))
 	
-	velocity_x += f_x*force/get_weight()
-	velocity_y += f_y*force/get_weight()
+	velocity_x = f_x*force/get_weight()
+	velocity_y = f_y*force/get_weight()
 	
 }
 
 function calculate_speed() {
 	
+	//COMMENTED OUT --------------------------------------------------------------
+	//ended up being wayyy too glitchy to be worth it
+	
 	//normalize the vector if it's above the velocity limit
 	//OR::: FOR NOW:: WE ARE SIMPLY USING AN EXPONENTIAL FRICTION DEACCELERATOR
-	velocity_x = clamp(velocity_x, -velocity_limit, velocity_limit)
-	velocity_y = clamp(velocity_y, -velocity_limit, velocity_limit)
+	//velocity_x = clamp(velocity_x, -velocity_limit, velocity_limit)
+	//velocity_y = clamp(velocity_y, -velocity_limit, velocity_limit)
 	
-	var _vector_length;
+	//var _vector_length;
 		
-	//apply equal deacceleration, check in case they're both 0
-	if abs(velocity_x) > 0 and abs(velocity_y) > 0 {
-		_vector_length = sqrt(power(velocity_x,2)+power(abs(velocity_y),2))
-		var y_ratio = abs(dsin(point_direction(0,0, velocity_x, velocity_y)))
-		var x_ratio = abs(dcos(point_direction(0,0, velocity_x, velocity_y)))
+	////apply equal deacceleration, check in case they're both 0
+	//if abs(velocity_x) > 0 and abs(velocity_y) > 0 {
+	//	_vector_length = sqrt(power(velocity_x,2)+power(abs(velocity_y),2))
+	//	var y_ratio = abs(dsin(point_direction(0,0, velocity_x, velocity_y)))
+	//	var x_ratio = abs(dcos(point_direction(0,0, velocity_x, velocity_y)))
 		
-		//make sure it doesn't "bounce back")
-		if sign(velocity_y) == -1 {
-			velocity_y =clamp(velocity_y-sign(velocity_y)*(y_ratio*deacceleration*(power(0.1*_vector_length,2)))
-			,velocity_y
-			,0	
-			)
-		} else {
-			velocity_y =clamp(velocity_y-sign(velocity_y)*(y_ratio*deacceleration*(power(0.1*_vector_length,2)))
-			,0
-			,velocity_y	
-			)			
-		}
-		//we can calculate the x ratio by inverting it
-		if sign(velocity_x) == -1 {
-		velocity_x = clamp(velocity_x-sign(velocity_x)*((x_ratio)*deacceleration*(power(0.1*_vector_length,2)))
-		,velocity_x
-		,0
-		)
-		} else { 
-			velocity_x =clamp(velocity_x-sign(velocity_x)*((x_ratio)*deacceleration*(power(0.1*_vector_length,2)))
-			,0
-			,velocity_x
-			)			
-		}
-	} else {
-		if abs(velocity_y) > 0 {
-			_vector_length = velocity_y
-			if sign(velocity_y) == -1 {
-				velocity_y =clamp(velocity_y-sign(velocity_y)*(deacceleration*(power(0.1*_vector_length,2)))
-				,velocity_y
-				,0	
-				)
-			} else {
-				velocity_y =clamp(velocity_y-sign(velocity_y)*(deacceleration*(power(0.1*_vector_length,2)))
-				,0
-				,velocity_y	
-				)			
-			}
-		} else {
-			_vector_length = velocity_x
-			if sign(velocity_x) == -1 {
-			velocity_x = clamp(velocity_x-sign(velocity_x)*(deacceleration*(power(0.1*_vector_length,2)))
-			,velocity_x
-			,0
-			)
-			} else { 
-				velocity_x =clamp(velocity_x-sign(velocity_x)*(deacceleration*(power(0.1*_vector_length,2)))
-				,0
-				,velocity_x
-				)			
-			}
-		}
-	}
-	//cap if it goes under 1
-	if abs(velocity_x) < 1 {velocity_x=0}
-	if abs(velocity_y) < 1 {velocity_y=0}
+	//	//make sure it doesn't "bounce back")
+	//	if sign(velocity_y) == -1 {
+	//		velocity_y =clamp(velocity_y-sign(velocity_y)*(y_ratio*deacceleration*(power(0.1*_vector_length,2)))
+	//		,velocity_y
+	//		,0	
+	//		)
+	//	} else {
+	//		velocity_y =clamp(velocity_y-sign(velocity_y)*(y_ratio*deacceleration*(power(0.1*_vector_length,2)))
+	//		,0
+	//		,velocity_y	
+	//		)			
+	//	}
+	//	//we can calculate the x ratio by inverting it
+	//	if sign(velocity_x) == -1 {
+	//	velocity_x = clamp(velocity_x-sign(velocity_x)*((x_ratio)*deacceleration*(power(0.1*_vector_length,2)))
+	//	,velocity_x
+	//	,0
+	//	)
+	//	} else { 
+	//		velocity_x =clamp(velocity_x-sign(velocity_x)*((x_ratio)*deacceleration*(power(0.1*_vector_length,2)))
+	//		,0
+	//		,velocity_x
+	//		)			
+	//	}
+	//} else {
+	//	if abs(velocity_y) > 0 {
+	//		_vector_length = velocity_y
+	//		if sign(velocity_y) == -1 {
+	//			velocity_y =clamp(velocity_y-sign(velocity_y)*(deacceleration*(power(0.1*_vector_length,2)))
+	//			,velocity_y
+	//			,0	
+	//			)
+	//		} else {
+	//			velocity_y =clamp(velocity_y-sign(velocity_y)*(deacceleration*(power(0.1*_vector_length,2)))
+	//			,0
+	//			,velocity_y	
+	//			)			
+	//		}
+	//	} else {
+	//		_vector_length = velocity_x
+	//		if sign(velocity_x) == -1 {
+	//		velocity_x = clamp(velocity_x-sign(velocity_x)*(deacceleration*(power(0.1*_vector_length,2)))
+	//		,velocity_x
+	//		,0
+	//		)
+	//		} else { 
+	//			velocity_x =clamp(velocity_x-sign(velocity_x)*(deacceleration*(power(0.1*_vector_length,2)))
+	//			,0
+	//			,velocity_x
+	//			)			
+	//		}
+	//	}
+	//}
+	////cap if it goes under 1
+	//if abs(velocity_x) < 1 {velocity_x=0}
+	//if abs(velocity_y) < 1 {velocity_y=0}
 } 
 
 function apply_velocity() {
@@ -309,9 +312,11 @@ mvmstate.add("idle", {
 		
 	},
 	step: function() {
-		//move 
-		calculate_speed()
-		apply_velocity();
+		//don't move 
+		velocity_x = 0
+		velocity_y = 0
+		//calculate_speed()
+		//apply_velocity();
 		if move_left or move_right or move_up or move_down {
 			mvmstate.change("transport_active")
 			return 0
