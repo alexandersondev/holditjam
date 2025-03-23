@@ -13,3 +13,5 @@ function change_room(rm_index) {
 	}
 	room_goto(rm_index)	
 }
+
+instance_create_layer(x,y,"Instances", o_gui)

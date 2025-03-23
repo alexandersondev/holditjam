@@ -85,6 +85,7 @@
     {"id":{"name":"o_enemycontroller","path":"objects/o_enemycontroller/o_enemycontroller.yy",},},
     {"id":{"name":"o_equipment","path":"objects/o_equipment/o_equipment.yy",},},
     {"id":{"name":"o_game","path":"objects/o_game/o_game.yy",},},
+    {"id":{"name":"o_gui","path":"objects/o_gui/o_gui.yy",},},
     {"id":{"name":"o_mech","path":"objects/o_mech/o_mech.yy",},},
     {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},},
     {"id":{"name":"o_projectile","path":"objects/o_projectile/o_projectile.yy",},},
