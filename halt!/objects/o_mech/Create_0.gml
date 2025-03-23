@@ -101,12 +101,18 @@ function get_weight(){
 	var weight_sum = 1;
 	if chassis.durability < 1 {
 		weight_sum += 5	
+	} else {
+		weight_sum += chassis.weight	
 	}
 	if transport.durability < 1 {
 		weight_sum += 5
+	}else {
+		weight_sum += transport.weight	
 	}
 	if weapon.durability < 1 {
 		weight_sum += 5
+	}else {
+		weight_sum += weapon.weight	
 	}
 	return weight_sum
 }
